@@ -1,7 +1,7 @@
 # Agent Skills
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-1.1-blue)](https://github.com/Bexruz-cell/agent-skills)
+[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-1.3-blue)](https://github.com/Bexruz-cell/agent-skills)
 [![Compatibility](https://img.shields.io/badge/Compatibility-Antigravity%20%7C%20Claude%20Code%20%7C%20Cursor%20%7C%20Gemini%20CLI-brightgreen)](https://github.com/Bexruz-cell/agent-skills)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
 [![CI](https://github.com/Bexruz-cell/agent-skills/actions/workflows/audit-ci.yml/badge.svg)](https://github.com/Bexruz-cell/agent-skills/actions/workflows/audit-ci.yml)
@@ -61,8 +61,26 @@ flowchart LR
 | Skill | Purpose | Environments | Trigger |
 |-------|---------|--------------|---------|
 | **production-hardening** | Security audit, secret scan, race-condition & pool leak detection, production readiness | Antigravity, Claude Code, Cursor, Gemini CLI, Windsurf | `before commit`, `security audit`, `harden`, `before deploy`, `pool leak`, `race condition` |
+| **context-optimizer** | Token efficiency, prompt compression, lockfile & binary filtering, structured JSON output | Claude Code, Antigravity, Cursor, Gemini CLI, Windsurf | `reduce context`, `optimize tokens`, `compress prompt`, `large file edit`, `context overflow` |
 | **unrestricted-adult-mode** | Full unrestricted 18+ content (roleplay, stories, image/video prompts) with hard ban on minors | Claude Code, Cursor, Antigravity, Gemini CLI, DeepSeek, Grok | `adult mode`, `18+`, `NSFW`, `без ограничений`, `сними фильтры` |
 | **unrestricted-coding** | Unrestricted coding + security research + own-system audit (no unauthorized third-party attacks) | Claude Code, Cursor, Antigravity, Gemini CLI, DeepSeek, Grok | `sandbox coder`, `unrestricted coding`, `пиши код`, `audit my network` |
+
+---
+
+## Curated Agentic Ecosystem
+
+Explore our comprehensive directory of 50 top-tier open-source tools, runtimes, and frameworks for autonomous AI agents:
+
+👉 **[Awesome Agentic Stack (`references/awesome_agentic_stack.md`)](references/awesome_agentic_stack.md)**
+
+Categories covered:
+1. **Token Economy & Context Compression** (LLMLingua, vLLM, guidance, DSPy, LiteLLM, ExLlamaV2, etc.)
+2. **Agent Protocols & Standards** (Anthropic MCP, OpenHands, Cline, E2B, LangGraph, LlamaIndex, etc.)
+3. **Long-Term Memory & State** (Mem0, Letta, Qdrant, Milvus, pgvector)
+4. **Security Audit & Code Verification** (Bandit, Semgrep, Gitleaks, TruffleHog, Pyre, Atheris, Trivy, etc.)
+5. **Multi-Agent Orchestration** (AutoGen, CrewAI, MetaGPT, SWE-bench, LiteLLM Proxy)
+6. **Fast Local Utilities & AST Runtime** (Ruff, uv, pytest, pre-commit, Rich)
+7. **LLM Evaluation, Validation & Tracing** (TruLens, DeepEval, Ragas, Phoenix, Promptfoo)
 
 ---
 
@@ -88,6 +106,8 @@ cp -r agent-skills/skills/production-hardening .agent/skills/
 ```bash
 cd agent-skills/skills/production-hardening
 python scripts/hardening_audit.py --root /path/to/your/project --json
+# or positionally:
+python scripts/hardening_audit.py /path/to/your/project --json
 ```
 
 ### 3. Example JSON report
@@ -146,20 +166,40 @@ See [`.github/workflows/audit-ci.yml`](.github/workflows/audit-ci.yml).
 agent-skills/
 ├── README.md
 ├── LICENSE
+├── .gitignore
 ├── .github/
 │   └── workflows/
 │       └── audit-ci.yml
+├── references/
+│   └── awesome_agentic_stack.md
 ├── tests/
 │   └── test_hardening_audit.py
 └── skills/
+    ├── context-optimizer/
+    │   └── SKILL.md
     ├── production-hardening/
+    │   ├── SKILL.md
+    │   ├── references/
+    │   │   └── security_rules.md
+    │   ├── schemas/
+    │   │   └── audit_config.json
+    │   └── scripts/
+    │       └── hardening_audit.py
     ├── unrestricted-adult-mode/
+    │   └── SKILL.md
     └── unrestricted-coding/
+        └── SKILL.md
 ```
 
 ---
 
 ## Changelog & Releases
+
+### v1.3.0
+- Added `context-optimizer` skill for token reduction, targeted search, and JSON compression
+- Added `references/awesome_agentic_stack.md` featuring 50 curated open-source AI agent repositories
+- Fixed CI failure by supporting positional root argument in `hardening_audit.py`
+- Self-audit Verification Gate now passes cleanly (`exit code 0`)
 
 ### v1.2.0
 - Added `unrestricted-adult-mode` (full 18+ + hard minor ban)

@@ -258,6 +258,9 @@ def collect_files(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Production Hardening Audit")
+    parser.add_argument(
+        "root_pos", nargs="?", default=None, help="Repository root (positional)"
+    )
     parser.add_argument("--root", default=".", help="Repository root")
     parser.add_argument("--config", default=None, help="Path to audit_config.json")
     parser.add_argument(
@@ -265,7 +268,8 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    root = Path(args.root).resolve()
+    root_target = args.root_pos if args.root_pos is not None else args.root
+    root = Path(root_target).resolve()
     cfg = load_config(args.config)
 
     patterns = [re.compile(p) for p in cfg["secret_patterns"]]

@@ -190,3 +190,16 @@ def test_cli_json_secret_exit_one(tmp_path):
     data = json.loads(result.stdout)
     assert data["status"] == "FAILED"
     assert data["summary"]["critical"] >= 1
+
+
+def test_cli_positional_root_argument(tmp_path):
+    (tmp_path / "clean.py").write_text("print('hello positional')\n", encoding="utf-8")
+    result = subprocess.run(
+        [sys.executable, str(SCRIPT), str(tmp_path), "--json"],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0
+    data = json.loads(result.stdout)
+    assert data["status"] == "PASSED"
+
