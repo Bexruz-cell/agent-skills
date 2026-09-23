@@ -1,0 +1,31 @@
+{
+  "ignore_paths": [
+    ".git/",
+    "node_modules/",
+    "venv/",
+    ".venv/",
+    "dist/",
+    "build/",
+    "__pycache__/",
+    ".mypy_cache/",
+    ".pytest_cache/",
+    "coverage/",
+    "*.min.js",
+    "*.bundle.js"
+  ],
+  "secret_patterns": [
+    "AKIA[0-9A-Z]{16}",
+    "-----BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY-----",
+    "ghp_[A-Za-z0-9]{36}",
+    "xox[baprs]-[0-9A-Za-z-]{10,}",
+    "sk_live_[0-9a-zA-Z]{24,}",
+    "sk_test_[0-9a-zA-Z]{24,}"
+  ],
+  "entropy_threshold": 4.5,
+  "min_secret_length": 20,
+  "max_file_size_bytes": 1048576,
+  "http_timeout_seconds": 10.0,
+  "fail_on_severity": ["CRITICAL", "HIGH"],
+  "python_extensions": [".py"],
+  "node_extensions": [".js", ".ts", ".mjs", ".cjs"]
+}
