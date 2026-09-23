@@ -10,6 +10,8 @@
     ".mypy_cache/",
     ".pytest_cache/",
     "coverage/",
+    "tests/",
+    "test/",
     "*.min.js",
     "*.bundle.js"
   ],

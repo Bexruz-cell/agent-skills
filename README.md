@@ -1,9 +1,10 @@
 # Agent Skills
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-1.0-blue)](https://github.com/Bexruz-cell/agent-skills)
+[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-1.1-blue)](https://github.com/Bexruz-cell/agent-skills)
 [![Compatibility](https://img.shields.io/badge/Compatibility-Antigravity%20%7C%20Claude%20Code%20%7C%20Cursor%20%7C%20Gemini%20CLI-brightgreen)](https://github.com/Bexruz-cell/agent-skills)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
+[![CI](https://github.com/Bexruz-cell/agent-skills/actions/workflows/audit-ci.yml/badge.svg)](https://github.com/Bexruz-cell/agent-skills/actions/workflows/audit-ci.yml)
 
 > **Industrial open-source library of Agent Skills for autonomous IDEs**  
 > Production-ready skills that make AI agents reliable, secure and deterministic.
@@ -115,12 +116,39 @@ python scripts/hardening_audit.py --root /path/to/your/project --json
 
 ---
 
+## Testing & CI/CD
+
+### Run tests locally
+
+```bash
+pip install pytest flake8 mypy
+pytest tests/ -v
+```
+
+### CI Pipeline
+
+Every push and pull request to `main` runs:
+
+- Matrix testing on Python 3.10 / 3.11 / 3.12
+- flake8 + mypy
+- Full unit-test suite
+- Self-audit of the repository itself as a Verification Gate
+
+See [`.github/workflows/audit-ci.yml`](.github/workflows/audit-ci.yml).
+
+---
+
 ## Project Structure
 
 ```text
 agent-skills/
 ├── README.md
 ├── LICENSE
+├── .github/
+│   └── workflows/
+│       └── audit-ci.yml
+├── tests/
+│   └── test_hardening_audit.py
 └── skills/
     └── production-hardening/
         ├── SKILL.md
@@ -131,6 +159,24 @@ agent-skills/
         └── scripts/
             └── hardening_audit.py
 ```
+
+---
+
+## Changelog & Releases
+
+### v1.1.0
+- Fixed false positives on `dict.get()` / `cfg.get()` in HTTP-timeout detector
+- Added HTTP-client context awareness (`requests`, `session`, `httpx`, …)
+- Comprehensive unit tests (entropy, secrets, AST, CLI exit codes)
+- GitHub Actions CI matrix (Python 3.10–3.12)
+- Documented failure modes and known limitations
+- Invocation examples for Claude Code, Cursor, Antigravity, Gemini CLI
+
+### v1.0.0
+- Initial production-hardening skill
+- Secret scanning (regex + Shannon entropy)
+- Basic AST checks
+- Structured JSON report
 
 ---
 
