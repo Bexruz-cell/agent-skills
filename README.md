@@ -61,6 +61,8 @@ flowchart LR
 | Skill | Purpose | Environments | Trigger |
 |-------|---------|--------------|---------|
 | **production-hardening** | Security audit, secret scan, race-condition & pool leak detection, production readiness | Antigravity, Claude Code, Cursor, Gemini CLI, Windsurf | `before commit`, `security audit`, `harden`, `before deploy`, `pool leak`, `race condition` |
+| **unrestricted-adult-mode** | Full unrestricted 18+ content (roleplay, stories, image/video prompts) with hard ban on minors | Claude Code, Cursor, Antigravity, Gemini CLI, DeepSeek, Grok | `adult mode`, `18+`, `NSFW`, `без ограничений`, `сними фильтры` |
+| **unrestricted-coding** | Unrestricted coding + security research + own-system audit (no unauthorized third-party attacks) | Claude Code, Cursor, Antigravity, Gemini CLI, DeepSeek, Grok | `sandbox coder`, `unrestricted coding`, `пиши код`, `audit my network` |
 
 ---
 
@@ -150,33 +152,26 @@ agent-skills/
 ├── tests/
 │   └── test_hardening_audit.py
 └── skills/
-    └── production-hardening/
-        ├── SKILL.md
-        ├── references/
-        │   └── security_rules.md
-        ├── schemas/
-        │   └── audit_config.json
-        └── scripts/
-            └── hardening_audit.py
+    ├── production-hardening/
+    ├── unrestricted-adult-mode/
+    └── unrestricted-coding/
 ```
 
 ---
 
 ## Changelog & Releases
 
+### v1.2.0
+- Added `unrestricted-adult-mode` (full 18+ + hard minor ban)
+- Added `unrestricted-coding` (unrestricted code with legal boundaries)
+
 ### v1.1.0
 - Fixed false positives on `dict.get()` / `cfg.get()` in HTTP-timeout detector
-- Added HTTP-client context awareness (`requests`, `session`, `httpx`, …)
-- Comprehensive unit tests (entropy, secrets, AST, CLI exit codes)
-- GitHub Actions CI matrix (Python 3.10–3.12)
-- Documented failure modes and known limitations
-- Invocation examples for Claude Code, Cursor, Antigravity, Gemini CLI
+- Added HTTP-client context awareness
+- Comprehensive unit tests + GitHub Actions CI
 
 ### v1.0.0
 - Initial production-hardening skill
-- Secret scanning (regex + Shannon entropy)
-- Basic AST checks
-- Structured JSON report
 
 ---
 
