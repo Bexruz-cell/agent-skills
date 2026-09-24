@@ -1,5 +1,15 @@
 # Changelog
 
+## v1.4.0 (finalization)
+
+### Fixed / finalized
+
+- Synchronized `awesome_agentic_stack.md` and `INDEX.md` with JSON registry (single source of truth)
+- Full repository acceptance validator (`REPOSITORY ACCEPTED` only when all checks pass)
+- JSON ↔ Markdown sync tests and negative validator test
+- CI runs the same acceptance validator
+- `docs/AI_AGENT_VERIFICATION.md` for AI agents
+
 ## v1.4.0
 
 ### Added
