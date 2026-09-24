@@ -27,6 +27,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest flake8
 
+      - name: Sync registry docs from JSON source of truth
+        run: |
+          python scripts/generate_registry_docs.py
+
       - name: Lint with flake8
         run: |
           flake8 skills/production-hardening/scripts/hardening_audit.py agent_skills/ tests/ scripts/ \
