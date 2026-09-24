@@ -93,11 +93,24 @@ Agents should filter by category and load **one** reference file when needed. Ne
 
 ---
 
-## Validation
+## Repository Verification
+
+Agents and humans must run the acceptance validator. Do **not** treat documentation claims as proof of acceptance.
 
 ```bash
-python -m agent_skills.cli validate
+# Human-readable (must end with REPOSITORY ACCEPTED)
+python -m agent_skills.cli validate --skip-heavy
+# or
+python scripts/validate_repository.py
+
+# Machine-readable
+python -m agent_skills.cli validate --json --skip-heavy
 ```
+
+Accept only when JSON has `"accepted": true` and status is `"accepted"`.
+`REPOSITORY ACCEPTED` is emitted by the validator only after all mandatory checks pass.
+
+See [docs/AI_AGENT_VERIFICATION.md](docs/AI_AGENT_VERIFICATION.md).
 
 ---
 
