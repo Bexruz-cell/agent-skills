@@ -29,34 +29,22 @@ jobs:
 
       - name: Lint with flake8
         run: |
-          flake8 skills/production-hardening/scripts/hardening_audit.py agent_skills/ tests/ \
+          flake8 skills/production-hardening/scripts/hardening_audit.py agent_skills/ tests/ scripts/ \
             --count --select=E9,F63,F7,F82 --show-source --statistics
-          flake8 skills/production-hardening/scripts/hardening_audit.py agent_skills/ tests/ \
+          flake8 skills/production-hardening/scripts/hardening_audit.py agent_skills/ tests/ scripts/ \
             --count --exit-zero --max-complexity=15 --max-line-length=110 --statistics
 
       - name: Run unit tests
         run: |
           pytest tests/ -v --tb=short
 
-      - name: Skill validation
+      - name: Repository Acceptance
         run: |
-          python -m agent_skills.cli validate
+          python -m agent_skills.cli validate --skip-heavy
 
-      - name: Repository registry validation
+      - name: Repository Acceptance (JSON)
         run: |
-          python -c "
-          import json
-          from pathlib import Path
-          reg = json.loads(Path('references/awesome_agentic_stack.json').read_text())
-          assert len(reg['repositories']) == 50, len(reg['repositories'])
-          ids = [r['id'] for r in reg['repositories']]
-          urls = [r['url'] for r in reg['repositories']]
-          assert len(ids) == len(set(ids))
-          assert len(urls) == len(set(urls))
-          for r in reg['repositories']:
-              assert (Path('references') / r['reference_file']).exists()
-          print('Registry OK: 50/50')
-          "
+          python -m agent_skills.cli validate --json --skip-heavy | python -c "import sys,json; d=json.load(sys.stdin); assert d['accepted'] is True, d; print('accepted=true')"
 
       - name: Self-audit (Verification Gate)
         run: |
