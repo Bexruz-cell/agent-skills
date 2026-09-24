@@ -103,3 +103,58 @@ Total repositories: **50**
 - `qdrant` — [Qdrant](repositories/023-qdrant.md) (qdrant/qdrant)
 - `milvus` — [Milvus](repositories/024-milvus.md) (milvus-io/milvus)
 - `pgvector` — [pgvector](repositories/025-pgvector.md) (pgvector/pgvector)
+
+## All Repositories (numeric)
+
+| # | ID | Name | Category | Repository |
+|---|----|------|----------|------------|
+| 001 | `llmlingua` | LLMLingua | context-compression | [microsoft/LLMLingua](https://github.com/microsoft/LLMLingua) |
+| 002 | `chroma` | Chroma | vector-databases | [chroma-core/chroma](https://github.com/chroma-core/chroma) |
+| 003 | `exllamav2` | ExLlamaV2 | local-inference | [turboderp/exllamav2](https://github.com/turboderp/exllamav2) |
+| 004 | `llama-cpp` | llama.cpp | local-inference | [ggerganov/llama.cpp](https://github.com/ggerganov/llama.cpp) |
+| 005 | `guidance` | Guidance | structured-generation | [guidance-ai/guidance](https://github.com/guidance-ai/guidance) |
+| 006 | `outlines` | Outlines | structured-generation | [dottxt-ai/outlines](https://github.com/dottxt-ai/outlines) |
+| 007 | `dspy` | DSPy | prompt-testing | [stanfordnlp/dspy](https://github.com/stanfordnlp/dspy) |
+| 008 | `litellm` | LiteLLM | agent-orchestration | [BerriAI/litellm](https://github.com/BerriAI/litellm) |
+| 009 | `vllm` | vLLM | local-inference | [vllm-project/vllm](https://github.com/vllm-project/vllm) |
+| 010 | `text-generation-inference` | Text Generation Inference | local-inference | [huggingface/text-generation-inference](https://github.com/huggingface/text-generation-inference) |
+| 011 | `mcp-servers` | MCP Servers | agent-protocols | [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers) |
+| 012 | `anthropic-quickstarts` | Anthropic Quickstarts | agent-protocols | [anthropics/anthropic-quickstarts](https://github.com/anthropics/anthropic-quickstarts) |
+| 013 | `llama-index` | LlamaIndex | long-term-memory | [run-llama/llama_index](https://github.com/run-llama/llama_index) |
+| 014 | `langchain` | LangChain | agent-orchestration | [langchain-ai/langchain](https://github.com/langchain-ai/langchain) |
+| 015 | `langgraph` | LangGraph | agent-orchestration | [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) |
+| 016 | `autogpt` | AutoGPT | agent-orchestration | [Significant-Gravitas/AutoGPT](https://github.com/Significant-Gravitas/AutoGPT) |
+| 017 | `open-interpreter` | Open Interpreter | local-developer-tooling | [open-interpreter/open-interpreter](https://github.com/open-interpreter/open-interpreter) |
+| 018 | `e2b` | E2B | local-developer-tooling | [e2b-dev/E2B](https://github.com/e2b-dev/E2B) |
+| 019 | `openhands` | OpenHands | agent-orchestration | [All-Hands-AI/OpenHands](https://github.com/All-Hands-AI/OpenHands) |
+| 020 | `cline` | Cline | local-developer-tooling | [cline/cline](https://github.com/cline/cline) |
+| 021 | `mem0` | Mem0 | long-term-memory | [mem0ai/mem0](https://github.com/mem0ai/mem0) |
+| 022 | `letta` | Letta | long-term-memory | [letta-ai/letta](https://github.com/letta-ai/letta) |
+| 023 | `qdrant` | Qdrant | vector-databases | [qdrant/qdrant](https://github.com/qdrant/qdrant) |
+| 024 | `milvus` | Milvus | vector-databases | [milvus-io/milvus](https://github.com/milvus-io/milvus) |
+| 025 | `pgvector` | pgvector | vector-databases | [pgvector/pgvector](https://github.com/pgvector/pgvector) |
+| 026 | `bandit` | Bandit | static-analysis | [PyCQA/bandit](https://github.com/PyCQA/bandit) |
+| 027 | `semgrep` | Semgrep | static-analysis | [semgrep/semgrep](https://github.com/semgrep/semgrep) |
+| 028 | `semgrep-rules` | Semgrep Rules | static-analysis | [semgrep/semgrep-rules](https://github.com/semgrep/semgrep-rules) |
+| 029 | `gitleaks` | Gitleaks | security | [gitleaks/gitleaks](https://github.com/gitleaks/gitleaks) |
+| 030 | `trufflehog` | TruffleHog | security | [trufflesecurity/trufflehog](https://github.com/trufflesecurity/trufflehog) |
+| 031 | `pyre-check` | Pyre | static-analysis | [facebook/pyre-check](https://github.com/facebook/pyre-check) |
+| 032 | `atheris` | Atheris | fuzzing | [google/atheris](https://github.com/google/atheris) |
+| 033 | `algo` | Algo | security | [trailofbits/algo](https://github.com/trailofbits/algo) |
+| 034 | `trivy` | Trivy | dependency-security | [aquasecurity/trivy](https://github.com/aquasecurity/trivy) |
+| 035 | `dependabot-core` | Dependabot Core | dependency-security | [dependabot/dependabot-core](https://github.com/dependabot/dependabot-core) |
+| 036 | `autogen` | AutoGen | agent-orchestration | [microsoft/autogen](https://github.com/microsoft/autogen) |
+| 037 | `crewai` | CrewAI | agent-orchestration | [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) |
+| 038 | `metagpt` | MetaGPT | agent-orchestration | [geekan/MetaGPT](https://github.com/geekan/MetaGPT) |
+| 039 | `swe-bench` | SWE-bench | evaluation | [princeton-nlp/SWE-bench](https://github.com/princeton-nlp/SWE-bench) |
+| 040 | `ruff` | Ruff | local-developer-tooling | [astral-sh/ruff](https://github.com/astral-sh/ruff) |
+| 041 | `uv` | uv | local-developer-tooling | [astral-sh/uv](https://github.com/astral-sh/uv) |
+| 042 | `pytest` | pytest | testing | [pytest-dev/pytest](https://github.com/pytest-dev/pytest) |
+| 043 | `pre-commit` | pre-commit | local-developer-tooling | [pre-commit/pre-commit](https://github.com/pre-commit/pre-commit) |
+| 044 | `rich` | Rich | local-developer-tooling | [Textualize/rich](https://github.com/Textualize/rich) |
+| 045 | `trulens` | TruLens | evaluation | [truera/trulens](https://github.com/truera/trulens) |
+| 046 | `deepeval` | DeepEval | evaluation | [confident-ai/deepeval](https://github.com/confident-ai/deepeval) |
+| 047 | `ragas` | Ragas | evaluation | [explodinggradients/ragas](https://github.com/explodinggradients/ragas) |
+| 048 | `phoenix` | Phoenix | observability | [Arize-ai/phoenix](https://github.com/Arize-ai/phoenix) |
+| 049 | `promptfoo` | Promptfoo | prompt-testing | [promptfoo/promptfoo](https://github.com/promptfoo/promptfoo) |
+| 050 | `mcp-python-sdk` | MCP Python SDK | agent-protocols | [modelcontextprotocol/python-sdk](https://github.com/modelcontextprotocol/python-sdk) |
