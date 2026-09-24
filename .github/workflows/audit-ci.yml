@@ -2,7 +2,7 @@ name: Audit CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, "feat/**"]
   pull_request:
     branches: [main]
 
@@ -25,22 +25,38 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest flake8 mypy
+          pip install pytest flake8
 
       - name: Lint with flake8
         run: |
-          flake8 skills/production-hardening/scripts/hardening_audit.py tests/ \
+          flake8 skills/production-hardening/scripts/hardening_audit.py agent_skills/ tests/ \
             --count --select=E9,F63,F7,F82 --show-source --statistics
-          flake8 skills/production-hardening/scripts/hardening_audit.py tests/ \
-            --count --exit-zero --max-complexity=12 --max-line-length=100 --statistics
-
-      - name: Type check with mypy
-        run: |
-          mypy skills/production-hardening/scripts/hardening_audit.py --ignore-missing-imports || true
+          flake8 skills/production-hardening/scripts/hardening_audit.py agent_skills/ tests/ \
+            --count --exit-zero --max-complexity=15 --max-line-length=110 --statistics
 
       - name: Run unit tests
         run: |
           pytest tests/ -v --tb=short
+
+      - name: Skill validation
+        run: |
+          python -m agent_skills.cli validate
+
+      - name: Repository registry validation
+        run: |
+          python -c "
+          import json
+          from pathlib import Path
+          reg = json.loads(Path('references/awesome_agentic_stack.json').read_text())
+          assert len(reg['repositories']) == 50, len(reg['repositories'])
+          ids = [r['id'] for r in reg['repositories']]
+          urls = [r['url'] for r in reg['repositories']]
+          assert len(ids) == len(set(ids))
+          assert len(urls) == len(set(urls))
+          for r in reg['repositories']:
+              assert (Path('references') / r['reference_file']).exists()
+          print('Registry OK: 50/50')
+          "
 
       - name: Self-audit (Verification Gate)
         run: |

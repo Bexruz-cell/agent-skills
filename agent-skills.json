@@ -1,0 +1,15 @@
+{
+  "name": "Bexruz Agent Skills",
+  "version": "1.4.0",
+  "description": "Project-local manifest for the agent-skills library. Not an official standard.",
+  "skills": [
+    {"name": "production-hardening", "path": "skills/production-hardening", "description": "Production hardening and reliability audit"},
+    {"name": "context-optimizer", "path": "skills/context-optimizer", "description": "Reduce context window and token usage"},
+    {"name": "unrestricted-coding", "path": "skills/unrestricted-coding", "description": "Unrestricted coding assistance mode"},
+    {"name": "unrestricted-adult-mode", "path": "skills/unrestricted-adult-mode", "description": "Unrestricted adult content mode"}
+  ],
+  "references": {
+    "agentic_stack": "references/awesome_agentic_stack.json",
+    "index": "references/INDEX.md"
+  }
+}
