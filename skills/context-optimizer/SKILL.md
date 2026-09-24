@@ -1,65 +1,53 @@
 ---
 name: context-optimizer
-version: 1.0.0
-type: token-efficiency
-description: "Context optimization and token efficiency protocol for AI agents. Enforces targeted search (rg/grep) instead of full-file reading, ignores lockfiles, minified bundles and binaries, truncates large outputs, and formats dense responses in structured JSON to prevent context window overflow."
-compatibility: claude-code, antigravity, gemini-cli, cursor, windsurf
+description: "Reduce context window and token usage for AI coding agents. Use when working with large repositories, large files, context overflow risks, or when the user asks to optimize tokens, compress prompts, or reduce context. Prefer targeted search (rg/grep) over full-file reads; ignore node_modules, .git, build artifacts, lockfiles and binaries."
 ---
 
 ## Trigger Criteria
 
-Activate this skill when:
-- User mentions: "reduce context", "optimize tokens", "compress prompt", "large file edit", "context overflow"
-- Working in large repositories with deep directory structures or high token consumption
-- Reading or refactoring files exceeding 500 lines or 50 KB
-- Inspecting test logs, build traces, or dependency graphs
-- Approaching model context window limits or managing strict token budgets
+Activate when:
+- User mentions: reduce context, optimize tokens, compress prompt, large file edit, context overflow, huge repository, large codebase, reduce token usage
+- Working in large monorepos or files > ~500 lines
+- Approaching model context limits
 
-## Execution Protocol
+## Core Rules
 
-1. **Targeted Code Retrieval (Ripgrep / Grep First)**:
-   - Never read full files when searching for definitions, usages, or patterns.
-   - Use `rg -n -C 2 "<pattern>"` or targeted search tools to locate exact lines.
-   - Read only specific line ranges (e.g. `view_file` with `StartLine` and `EndLine`) containing relevant blocks.
+1. Do **not** read an entire large file when only a fragment is needed.
+2. Prefer targeted search first: `rg`, `grep`, `find`, `git grep`.
+3. Locate symbol / function / class first, then read a limited line range.
+4. Never load without need:
+   - `node_modules/`, `.git/`, `build/`, `dist/`, caches
+   - lock files
+   - binary files
+5. For JSON: strip unnecessary whitespace while preserving structure and important fields.
+6. Prefer compact structured output for large results.
+7. Do not repeat already-known context.
+8. Do not load the entire repository when the task is local.
+9. Index / search first, then targeted read.
+10. When a reference is needed from the agentic stack, load **one** file from `references/repositories/` after consulting the registry — never all 50.
 
-2. **Strict File Filtering & Exclusions**:
-   - Completely ignore dependency lockfiles (`package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`, `poetry.lock`, `Pipfile.lock`, `Cargo.lock`, `composer.lock`).
-   - Skip generated build artifacts (`dist/`, `build/`, `out/`, `coverage/`, `.next/`).
-   - Skip minified code (`*.min.js`, `*.bundle.js`, `*.min.css`) and sourcemaps (`*.map`).
-   - Never open binary files, compiled assets (`*.pyc`, `*.wasm`, `*.so`, `*.dll`), or sqlite databases directly.
+## Expected Output
 
-3. **Shell & Output Limiting (Select-Object / Head)**:
-   - Cap command outputs using `head -n 50`, `tail -n 50`, or PowerShell `Select-Object -First 50`.
-   - Never run raw `cat` or print full directory dumps without filtering.
-   - Redirect verbose compilation or test outputs to temporary logs and grep for failures only.
+- Concise findings or edits
+- Explicit file:line ranges used
+- Token-conscious summaries instead of full dumps
 
-4. **Prompt & Context Compression**:
-   - Eliminate conversational filler, redundant greetings, and speculative explanations.
-   - Extract and state only essential facts, file paths, diffs, and validation results.
-   - Keep tool call inputs tight and avoid passing repetitive prompt instructions.
+## Limitations
 
-5. **Structured JSON Output**:
-   - For multi-item results, audits, or status summaries, format output as dense, machine-readable JSON without extraneous prose.
+- Does not replace model context limits; it reduces waste.
+- Heuristic; agents must still respect host tool budgets.
 
-## Security & Reliability Boundaries
+## References
 
-- Do not bypass verification gates when optimizing context — critical checks and tests must always run.
-- Do not compress out critical error messages, stack traces, or validation failures.
-- Always preserve line numbers and exact filenames when reporting findings.
+- `references/awesome_agentic_stack.json` (registry — filter, do not dump)
+- `references/INDEX.md`
+- `references/repositories/001-llmlingua.md` (context compression)
+- `docs/AGENT_COMPATIBILITY.md`
 
-## Output Format
+## Examples
 
-When summarizing optimization actions or structured findings:
+**Bad**: `cat src/huge_module.py`  
+**Good**: `rg -n "def process_" src/` then read only the matching function range.
 
-```json
-{
-  "status": "OPTIMIZED",
-  "files_filtered": [
-    "package-lock.json",
-    "dist/*"
-  ],
-  "retrieval_method": "targeted_grep",
-  "token_savings_estimate": "high",
-  "summary": "Context pruned: lockfiles ignored, targeted AST/grep retrieval applied."
-}
-```
+**Bad**: Load all 50 repository reference files.  
+**Good**: Read registry → filter category `context-compression` → open only `001-llmlingua.md`.
