@@ -11,15 +11,17 @@ This repository is a portable **Agent Skills** library with a machine-verifiable
 5. Run the repository validator:
 
 ```bash
-python -m agent_skills.cli validate
+python -m agent_skills.cli validate --skip-heavy
 # or
-python agent_skills/validate.py
+python scripts/validate_repository.py
+# or
+python agent_skills/validate.py --skip-heavy
 ```
 
 6. For machine parsing:
 
 ```bash
-python -m agent_skills.cli validate --json
+python -m agent_skills.cli validate --json --skip-heavy
 ```
 
 7. Accept the repository only if:
